@@ -13,7 +13,7 @@
     <!-- Visualization & Content Choices:
         - Professional Summary: Textual content. Goal: Inform. Presentation: Paragraph. Justification: Provides a concise, high-level overview.
         - Professional Experience: Textual content (job descriptions). Goal: Inform, show change. Presentation: Vertical timeline with collapsible HTML div elements for each job. Interaction: Click to expand/collapse details. Justification: Offers a chronological overview while preventing information overload and allowing on-demand detail exploration. Library/Method: HTML/CSS/JavaScript.
-        - Technical Skills: Textual content (detailed list). Goal: Organize, Inform. Presentation: Detailed list with interactive sparkle icons. Interaction: Click sparkle icon to trigger LLM explanation in a modal. Justification: Provides a comprehensive overview of all technical skills and offers on-demand, AI-generated context for each skill, making it more informative for recruiters. Library/Method: HTML/CSS/JavaScript, Gemini API (gemini-2.0-flash).
+        - Technical Skills: Textual content (detailed list). Goal: Organize, Inform. Presentation: Detailed list with interactive sparkle icons. Interaction: Click sparkle icon to trigger LLM explanation in a modal. Justification: Provides a comprehensive overview of all technical skills and offers on-demand, AI-generated context for each skill, making it more informative for recruiters. Library/Method: HTML/CSS/JavaScript, hardcoded explanations.
         - Education, Certifications, Languages: Textual content. Goal: Inform. Presentation: Standard HTML lists/paragraphs with direct links for certifications. Justification: Clear and concise presentation of factual information. Library/Method: HTML/CSS.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
@@ -296,43 +296,53 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2 text-gray-700">
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">Cloud Platforms:</span> AWS, GCP (EKS, Lambda, EC2, S3, RDS, DynamoDB, Aurora, CloudFormation, Route53)</span>
-                    <button class="sparkle-button" data-skill="Cloud Platforms">✨</button>
+                    <button class="sparkle-button" data-skill="Cloud Platforms"
+                            data-explanation="Cloud platforms (AWS, GCP) provide scalable, on-demand infrastructure for DevOps, enabling rapid deployment, automation, and consistent environments. They offer services for compute, storage, networking, and specialized tools like EKS and CloudFormation, crucial for modern software delivery and operations.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">Infrastructure-as-Code:</span> Terraform, AWS CDK, Ansible, CloudFormation</span>
-                    <button class="sparkle-button" data-skill="Infrastructure-as-Code">✨</button>
+                    <button class="sparkle-button" data-skill="Infrastructure-as-Code"
+                            data-explanation="IaC defines and manages infrastructure (servers, databases, networks) using code, stored in version control. Tools like Terraform and Ansible automate provisioning, ensuring consistency across environments, reducing manual errors, and enabling faster, repeatable deployments.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">CI/CD:</span> Jenkins, GitHub Actions, GitLab CI</span>
-                    <button class="sparkle-button" data-skill="CI/CD">✨</button>
+                    <button class="sparkle-button" data-skill="CI/CD"
+                            data-explanation="Continuous Integration (CI) automates code merging and testing, while Continuous Delivery/Deployment (CD) extends this to automatic release. CI/CD pipelines streamline software development, enabling frequent, reliable releases, reducing bugs, and accelerating time-to-market.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">Containerization & Orchestration:</span> Docker, Docker Compose, Kubernetes (EKS, on-premises)</span>
-                    <button class="sparkle-button" data-skill="Containerization & Orchestration">✨</button>
+                    <button class="sparkle-button" data-skill="Containerization & Orchestration"
+                            data-explanation="Containerization (Docker) packages applications and dependencies into isolated units for consistent deployment. Orchestration (Kubernetes) automates the management, scaling, and networking of these containers, crucial for deploying and managing microservices at scale across diverse environments.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">Scripting & Automation:</span> Bash, PowerShell, Python (Linux & Windows environments)</span>
-                    <button class="sparkle-button" data-skill="Scripting & Automation">✨</button>
+                    <button class="sparkle-button" data-skill="Scripting & Automation"
+                            data-explanation="In DevOps, scripting (Bash, PowerShell, Python) automates repetitive tasks across Windows and Linux environments. This enhances efficiency, reduces human error, and enables faster, more reliable execution of build, test, deployment, and operational workflows.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">Programming Languages:</span> Rust, Python, Java, TypeScript, JavaScript, C++, C#</span>
-                    <button class="sparkle-button" data-skill="Programming Languages">✨</button>
+                    <button class="sparkle-button" data-skill="Programming Languages"
+                            data-explanation="Languages like Rust, Python, Java, and TypeScript are essential for DevOps engineers. They are used for developing automation scripts, backend APIs, microservices, and custom tooling, enabling efficient and scalable solutions across the software development lifecycle.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">Databases:</span> PostgreSQL, MongoDB, DynamoDB, Aurora, RDS</span>
-                    <button class="sparkle-button" data-skill="Databases">✨</button>
+                    <button class="sparkle-button" data-skill="Databases"
+                            data-explanation="Databases are critical for storing and managing application data. DevOps practices extend to database management, ensuring schema changes are version-controlled, automated, and synchronized with application deployments for consistency, reliability, and faster updates.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">API Security:</span> OAuth 2.0, JWT, API Gateways, Rate Limiting</span>
-                    <button class="sparkle-button" data-skill="API Security">✨</button>
+                    <button class="sparkle-button" data-skill="API Security"
+                            data-explanation="API security in DevOps integrates security measures into the API lifecycle, protecting data and systems from unauthorized access and threats. It involves authentication (OAuth, JWT), authorization, gateways, and rate limiting to ensure secure communication and prevent vulnerabilities in fast-paced environments.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">DevOps Tools:</span> Git, Nexus, Vault, Helm</span>
-                    <button class="sparkle-button" data-skill="DevOps Tools">✨</button>
+                    <button class="sparkle-button" data-skill="DevOps Tools"
+                            data-explanation="DevOps tools encompass various platforms and applications (e.g., Git, Jenkins, Nexus, Vault, Helm) that support collaboration, automation, and fast release cycles across the software development lifecycle. They streamline version control, CI/CD, artifact management, and secret management.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">Operating Systems:</span> Linux, Windows</span>
-                    <button class="sparkle-button" data-skill="Operating Systems">✨</button>
+                    <button class="sparkle-button" data-skill="Operating Systems"
+                            data-explanation="Operating systems (Linux, Windows) provide the foundational environment for applications and infrastructure. In DevOps, understanding OS fundamentals is crucial for configuring servers, deploying containers, scripting automation, and monitoring system health across diverse deployment targets.">✨</button>
                 </div>
             </div>
         </section>
@@ -362,14 +372,14 @@
         </section>
 
         <section id="languages" class="card">
-            <h2 class="section-heading">Languages</h2>
+            <h2 class="section-heading">Language Proficiency</h2>
             <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto mb-8">
-                My language skills enable effective communication in diverse professional environments.
+                My fluency in multiple languages enables effective communication and collaboration in diverse professional environments.
             </p>
             <div class="text-center">
                 <ul class="list-disc list-inside text-gray-700">
-                    <li>**Portuguese:** Native</li>
-                    <li>**English:** C1 – Professional Working Proficiency</li>
+                    <li>Portuguese: Native</li>
+                    <li>English: C1 – Professional Working Proficiency</li>
                 </ul>
             </div>
         </section>
@@ -389,7 +399,7 @@
             <span class="close-button">&times;</span>
             <h3 id="modalSkillTitle" class="text-xl font-bold mb-4"></h3>
             <p id="modalSkillExplanation" class="text-gray-700"></p>
-            <div id="modalLoading" class="text-center py-4">
+            <div id="modalLoading" class="text-center py-4" style="display: none;">
                 <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
                 <p class="text-sm text-gray-500 mt-2">Generating explanation...</p>
             </div>
@@ -424,50 +434,22 @@
                 });
             });
 
-            // Skill Explanation Modal Logic
+            // Skill Explanation Modal Logic (now using hardcoded explanations)
             const skillModal = document.getElementById('skillModal');
             const closeButton = skillModal.querySelector('.close-button');
             const modalSkillTitle = document.getElementById('modalSkillTitle');
             const modalSkillExplanation = document.getElementById('modalSkillExplanation');
-            const modalLoading = document.getElementById('modalLoading');
+            const modalLoading = document.getElementById('modalLoading'); // Still exists but will be hidden
 
             document.querySelectorAll('.sparkle-button').forEach(button => {
-                button.addEventListener('click', async function() {
+                button.addEventListener('click', function() {
                     const skillName = this.getAttribute('data-skill');
+                    const explanation = this.getAttribute('data-explanation');
+
                     modalSkillTitle.textContent = skillName;
-                    modalSkillExplanation.textContent = ''; // Clear previous content
-                    modalLoading.style.display = 'block'; // Show loading
+                    modalSkillExplanation.textContent = explanation;
+                    modalLoading.style.display = 'none'; // Ensure loading is hidden
                     skillModal.style.display = 'flex'; // Show modal
-
-                    try {
-                        const prompt = `Explain what '${skillName}' is in the context of DevOps for a recruiter in a concise manner (max 80 words).`;
-                        let chatHistory = [];
-                        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                        const payload = { contents: chatHistory };
-                        const apiKey = ""; 
-                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-                        const response = await fetch(apiUrl, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
-                        const result = await response.json();
-
-                        if (result.candidates && result.candidates.length > 0 &&
-                            result.candidates[0].content && result.candidates[0].content.parts &&
-                            result.candidates[0].content.parts.length > 0) {
-                            const text = result.candidates[0].content.parts[0].text;
-                            modalSkillExplanation.textContent = text;
-                        } else {
-                            modalSkillExplanation.textContent = "Could not generate explanation. Please try again.";
-                        }
-                    } catch (error) {
-                        console.error('Error fetching skill explanation:', error);
-                        modalSkillExplanation.textContent = "Failed to load explanation due to an error.";
-                    } finally {
-                        modalLoading.style.display = 'none'; // Hide loading
-                    }
                 });
             });
 
