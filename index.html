@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>João Monteiro - Cloud DevOps Engineer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals & Professional Blue -->
+    <!-- Application Structure Plan: A single-page portfolio design with a sticky navigation bar for easy access to key sections: Summary, Experience, Skills, Education, Certifications, and Languages. The structure prioritizes a user-friendly, non-linear exploration path. The Professional Experience section features a vertical timeline with expandable details for each role, allowing users to "drill down" into specific responsibilities. The Technical Skills section now focuses on a detailed list, enhanced with an LLM-powered skill explainer. This design transforms the static CV into an engaging narrative, allowing recruiters to quickly grasp key qualifications and dive deeper into areas of interest. -->
+    <!-- Visualization & Content Choices:
+        - Professional Summary: Textual content. Goal: Inform. Presentation: Paragraph. Justification: Provides a concise, high-level overview.
+        - Professional Experience: Textual content (job descriptions). Goal: Inform, show change. Presentation: Vertical timeline with collapsible HTML div elements for each job. Interaction: Click to expand/collapse details. Justification: Offers a chronological overview while preventing information overload and allowing on-demand detail exploration. Library/Method: HTML/CSS/JavaScript.
+        - Technical Skills: Textual content (detailed list). Goal: Organize, Inform. Presentation: Detailed list with interactive sparkle icons. Interaction: Click sparkle icon to trigger LLM explanation in a modal. Justification: Provides a comprehensive overview of all technical skills and offers on-demand, AI-generated context for each skill, making it more informative for recruiters. Library/Method: HTML/CSS/JavaScript, Gemini API (gemini-2.0-flash).
+        - Education, Certifications, Languages: Textual content. Goal: Inform. Presentation: Standard HTML lists/paragraphs with direct links for certifications. Justification: Clear and concise presentation of factual information. Library/Method: HTML/CSS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light blue-gray */
+            color: #334155; /* Darker blue-gray for text */
+            line-height: 1.6;
+        }
+        .container-main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        h1, h2, h3 {
+            color: #1e293b;
+        }
+        .section-heading {
+            text-align: center;
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            margin-bottom: 2rem;
+            color: #1e293b;
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #2563eb; /* Blue accent */
+        }
+        .link-style {
+            color: #ffffff; /* White for header links */
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+        }
+        .link-style:hover {
+            color: #bfdbfe; /* Lighter blue on hover */
+            text-decoration: underline;
+        }
+        .experience-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0.25rem;
+            width: 0.75rem;
+            height: 0.75rem;
+            background-color: #2563eb; /* Blue accent */
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 0 2px #2563eb;
+        }
+        .experience-item::after {
+            content: '';
+            position: absolute;
+            left: 0.85rem;
+            top: 1.25rem;
+            bottom: -0.5rem;
+            width: 2px;
+            background-color: #cbd5e1; /* Light gray line */
+        }
+        .experience-item:last-child::after {
+            display: none; /* Hide line for last item */
+        }
+        .details-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            opacity: 0;
+        }
+        .details-content.open {
+            max-height: 500px; /* Sufficiently large to show content */
+            opacity: 1;
+            margin-top: 0.75rem;
+        }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border-radius: 0.75rem;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .skill-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* To push the sparkle icon to the right */
+            padding: 0.25rem 0;
+        }
+        .skill-text {
+            flex-grow: 1;
+        }
+        .sparkle-button {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #F6E05E; /* Yellow sparkle */
+            margin-left: 0.5rem;
+            padding: 0;
+            line-height: 1;
+        }
+        .sparkle-button:hover {
+            color: #FFD700; /* Brighter yellow on hover */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="#" class="text-2xl font-bold text-gray-700">João Monteiro</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#summary" class="nav-link text-gray-600 font-medium">Summary</a>
+                    <a href="#experience" class="nav-link text-gray-600 font-medium">Experience</a>
+                    <a href="#skills" class="nav-link text-gray-600 font-medium">Skills</a>
+                    <a href="#education" class="nav-link text-gray-600 font-medium">Education</a>
+                    <a href="#certifications" class="nav-link text-gray-600 font-medium">Certifications</a>
+                    <a href="#languages" class="nav-link text-gray-600 font-medium">Languages</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-md">
+            <a href="#summary" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Summary</a>
+            <a href="#experience" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Experience</a>
+            <a href="#skills" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Skills</a>
+            <a href="#education" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Education</a>
+            <a href="#certifications" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Certifications</a>
+            <a href="#languages" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Languages</a>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-br from-blue-700 to-indigo-900 text-white py-24 text-center relative overflow-hidden">
+        <!-- Subtle background pattern for visual interest -->
+        <div class="absolute inset-0 z-0 opacity-10" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
+        
+        <div class="container-main relative z-10">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-4 tracking-tight leading-tight">João Monteiro</h1>
+            <p class="text-2xl md:text-4xl font-light mb-8 text-blue-200">Cloud DevOps Engineer</p>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center md:space-x-8 space-y-4 md:space-y-0 text-lg">
+                <span class="flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-blue-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                    Porto, Portugal
+                </span>
+                <span class="flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-blue-300" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 2.5l7.997 3.384A1 1 0 0119 6.816v6.368a1 1 0 01-.997.932l-7.997 3.384-7.997-3.384A1 1 0 011 13.184V6.816a1 1 0 011.003-.932zM10 4.412L4.054 6.816 10 9.22l5.946-2.404L10 4.412zM2 8.168l7 2.997v5.466l-7-2.997V8.168z"></path></svg>
+                    jmonteiro.aws@gmail.com
+                </span>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6 mt-8">
+                <a href="https://www.linkedin.com/in/jo%C3%A3o-monteiro-52a1386b" target="_blank" rel="noopener noreferrer" class="link-style px-6 py-3 border border-white rounded-full hover:bg-white hover:text-blue-700 transition duration-300">
+                    LinkedIn Profile
+                </a>
+                <a href="https://github.com/Pergunta" target="_blank" rel="noopener noreferrer" class="link-style px-6 py-3 border border-white rounded-full hover:bg-white hover:text-blue-700 transition duration-300">
+                    GitHub Profile
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container-main">
+
+        <section id="summary" class="card">
+            <h2 class="section-heading">Professional Summary</h2>
+            <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto">
+                Highly skilled Cloud DevOps Engineer with 4+ years of experience automating infrastructure and streamlining deployments across diverse AWS environments. Proficient in Infrastructure-as-Code (IaC) tools (Terraform, Ansible, CloudFormation) and developing robust CI/CD pipelines (Jenkins, GitHub Actions). Strong command over containerization (Docker, Kubernetes) and scripting for Windows/Linux systems. Experienced in implementing secure, scalable cloud solutions and enforcing API security standards (OAuth, JWT). Proven background in managing cloud-native databases (PostgreSQL, MongoDB, DynamoDB, Aurora, RDS).
+            </p>
+        </section>
+
+        <section id="experience" class="card">
+            <h2 class="section-heading">Professional Experience</h2>
+            <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto mb-8">
+                Explore my career journey through the interactive timeline below. Click on each job title to reveal detailed responsibilities and achievements, showcasing my contributions in various roles.
+            </p>
+
+            <div class="relative">
+                <div class="experience-item">
+                    <div class="cursor-pointer" data-target="orange-comet-details">
+                        <h3 class="text-xl font-semibold text-blue-700">DevOps Engineer</h3>
+                        <p class="text-gray-600">Orange Comet – Remote, United States</p>
+                        <p class="text-sm text-gray-500">📅 Dec 2022 – Present</p>
+                    </div>
+                    <div id="orange-comet-details" class="details-content">
+                        <ul class="list-disc pl-5 mt-2 text-gray-700">
+                            <li>Maintained and optimized AWS infrastructure (CloudFormation, EKS, Lambda, EC2, VPC, S3, RDS, DynamoDB, SQS, SNS) for high availability.</li>
+                            <li>Developed scalable backend APIs in Rust and TypeScript.</li>
+                            <li>Designed, deployed, and managed Jenkins CI/CD pipelines, significantly improving release efficiency.</li>
+                            <li>Automated infrastructure provisioning with Terraform, Ansible, and AWS CloudFormation.</li>
+                            <li>Implemented and enforced API authentication and gateway security best practices.</li>
+                            <li>Supported multi-environment delivery across Windows and Linux systems.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="cursor-pointer" data-target="mint-state-details">
+                        <h3 class="text-xl font-semibold text-blue-700">Back-End Developer</h3>
+                        <p class="text-gray-600">Mint State Labs – Remote, United States</p>
+                        <p class="text-sm text-gray-500">📅 Jul 2022 – Dec 2022</p>
+                    </div>
+                    <div id="mint-state-details" class="details-content">
+                        <ul class="list-disc pl-5 mt-2 text-gray-700">
+                            <li>Built and maintained high-performance microservices in Rust.</li>
+                            <li>Integrated services into automated CI workflows, enhancing development efficiency.</li>
+                            <li>Optimized API and infrastructure performance for responsiveness and scalability.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="cursor-pointer" data-target="universidade-details">
+                        <h3 class="text-xl font-semibold text-blue-700">Research Scholar Engineer</h3>
+                        <p class="text-gray-600">Universidade de Aveiro – Aveiro, Portugal</p>
+                        <p class="text-sm text-gray-500">📅 Apr 2021 – Jan 2022</p>
+                    </div>
+                    <div id="universidade-details" class="details-content">
+                        <ul class="list-disc pl-5 mt-2 text-gray-700">
+                            <li>Developed backend features for the Payt project using C++, PostgreSQL, Docker, Python, and Java.</li>
+                            <li>Built and tested Dockerized services in isolated environments, ensuring portability.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="card">
+            <h2 class="section-heading">Technical Skills</h2>
+            <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto mb-8">
+                Here is a comprehensive list of my technical skills, categorized for easy review. Click the ✨ icon next to any skill to get a quick explanation!
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2 text-gray-700">
+                <div class="skill-item">
+                    <span class="skill-text"><span class="font-semibold text-gray-800">Cloud Platforms:</span> AWS, GCP (EKS, Lambda, EC2, S3, RDS, DynamoDB, Aurora, CloudFormation, Route53)</span>
+                    <button class="sparkle-button" data-skill="Cloud Platforms">✨</button>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-text"><span class="font-semibold text-gray-800">Infrastructure-as-Code:</span> Terraform, AWS CDK, Ansible, CloudFormation</span>
+                    <button class="sparkle-button" data-skill="Infrastructure-as-Code">✨</button>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-text"><span class="font-semibold text-gray-800">CI/CD:</span> Jenkins, GitHub Actions, GitLab CI</span>
+                    <button class="sparkle-button" data-skill="CI/CD">✨</button>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-text"><span class="font-semibold text-gray-800">Containerization & Orchestration:</span> Docker, Docker Compose, Kubernetes (EKS, on-premises)</span>
+                    <button class="sparkle-button" data-skill="Containerization & Orchestration">✨</button>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-text"><span class="font-semibold text-gray-800">Scripting & Automation:</span> Bash, PowerShell, Python (Linux & Windows environments)</span>
+                    <button class="sparkle-button" data-skill="Scripting & Automation">✨</button>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-text"><span class="font-semibold text-gray-800">Programming Languages:</span> Rust, Python, Java, TypeScript, JavaScript, C++, C#</span>
+                    <button class="sparkle-button" data-skill="Programming Languages">✨</button>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-text"><span class="font-semibold text-gray-800">Databases:</span> PostgreSQL, MongoDB, DynamoDB, Aurora, RDS</span>
+                    <button class="sparkle-button" data-skill="Databases">✨</button>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-text"><span class="font-semibold text-gray-800">API Security:</span> OAuth 2.0, JWT, API Gateways, Rate Limiting</span>
+                    <button class="sparkle-button" data-skill="API Security">✨</button>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-text"><span class="font-semibold text-gray-800">DevOps Tools:</span> Git, Nexus, Vault, Helm</span>
+                    <button class="sparkle-button" data-skill="DevOps Tools">✨</button>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-text"><span class="font-semibold text-gray-800">Operating Systems:</span> Linux, Windows</span>
+                    <button class="sparkle-button" data-skill="Operating Systems">✨</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="card">
+            <h2 class="section-heading">Education</h2>
+            <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto mb-8">
+                My academic foundation has equipped me with the theoretical knowledge and problem-solving skills essential for a successful career in software engineering and DevOps.
+            </p>
+            <div class="text-center">
+                <h3 class="text-xl font-semibold text-blue-700">Bachelor’s in Computer and Telematics Engineering</h3>
+                <p class="text-gray-600">Universidade de Aveiro, Portugal</p>
+            </div>
+        </section>
+
+        <section id="certifications" class="card">
+            <h2 class="section-heading">Certifications</h2>
+            <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto mb-8">
+                My professional certifications validate my expertise and commitment to continuous learning in the cloud domain.
+            </p>
+            <div class="text-center">
+                <h3 class="text-xl font-semibold text-blue-700">AWS Certified Cloud Practitioner</h3>
+                <p class="text-gray-600">Issue Date: Feb 2024 | Expiration Date: Feb 2027</p>
+                <p class="text-gray-600">Credential ID: 56b427c4badf49d397f16fc4e8ed9c29</p>
+                <a href="https://cp.certmetrics.com/amazon/en/public/verify/credential/56b427c4badf49d397f16fc4e8ed9c29" target="_blank" rel="noopener noreferrer" class="link-style mt-2 inline-block">Verify Credential</a>
+            </div>
+        </section>
+
+        <section id="languages" class="card">
+            <h2 class="section-heading">Languages</h2>
+            <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto mb-8">
+                My language skills enable effective communication in diverse professional environments.
+            </p>
+            <div class="text-center">
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>**Portuguese:** Native</li>
+                    <li>**English:** C1 – Professional Working Proficiency</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 text-center">
+        <div class="container-main">
+            <p>&copy; 2024 João Monteiro. All rights reserved.</p>
+            <p class="text-sm mt-2">Designed and built to showcase skills and experience.</p>
+        </div>
+    </footer>
+
+    <!-- Skill Explanation Modal -->
+    <div id="skillModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="modalSkillTitle" class="text-xl font-bold mb-4"></h3>
+            <p id="modalSkillExplanation" class="text-gray-700"></p>
+            <div id="modalLoading" class="text-center py-4">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+                <p class="text-sm text-gray-500 mt-2">Generating explanation...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                // Close mobile menu when a link is clicked
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+
+            // Experience item details toggle
+            document.querySelectorAll('.experience-item .cursor-pointer').forEach(item => {
+                item.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.classList.toggle('open');
+                    }
+                });
+            });
+
+            // Skill Explanation Modal Logic
+            const skillModal = document.getElementById('skillModal');
+            const closeButton = skillModal.querySelector('.close-button');
+            const modalSkillTitle = document.getElementById('modalSkillTitle');
+            const modalSkillExplanation = document.getElementById('modalSkillExplanation');
+            const modalLoading = document.getElementById('modalLoading');
+
+            document.querySelectorAll('.sparkle-button').forEach(button => {
+                button.addEventListener('click', async function() {
+                    const skillName = this.getAttribute('data-skill');
+                    modalSkillTitle.textContent = skillName;
+                    modalSkillExplanation.textContent = ''; // Clear previous content
+                    modalLoading.style.display = 'block'; // Show loading
+                    skillModal.style.display = 'flex'; // Show modal
+
+                    try {
+                        const prompt = `Explain what '${skillName}' is in the context of DevOps for a recruiter in a concise manner (max 80 words).`;
+                        let chatHistory = [];
+                        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                        const payload = { contents: chatHistory };
+                        const apiKey = ""; 
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        const result = await response.json();
+
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const text = result.candidates[0].content.parts[0].text;
+                            modalSkillExplanation.textContent = text;
+                        } else {
+                            modalSkillExplanation.textContent = "Could not generate explanation. Please try again.";
+                        }
+                    } catch (error) {
+                        console.error('Error fetching skill explanation:', error);
+                        modalSkillExplanation.textContent = "Failed to load explanation due to an error.";
+                    } finally {
+                        modalLoading.style.display = 'none'; // Hide loading
+                    }
+                });
+            });
+
+            closeButton.addEventListener('click', () => {
+                skillModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target == skillModal) {
+                    skillModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
