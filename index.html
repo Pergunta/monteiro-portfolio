@@ -243,16 +243,20 @@
 
         <section id="summary" class="card">
             <h2 class="section-heading">Professional Summary</h2>
+            <!-- START OF MODIFIED SECTION: Updated Professional Summary -->
             <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto">
                 Highly skilled Cloud DevOps Engineer with 4+ years of experience automating infrastructure and streamlining deployments across diverse AWS environments. Proficient in Infrastructure-as-Code (IaC) tools (Terraform, Ansible, CloudFormation) and developing robust CI/CD pipelines (Jenkins, GitHub Actions). Strong command over containerization (Docker, Kubernetes) and scripting for Windows/Linux systems. Experienced in implementing secure, scalable cloud solutions and enforcing API security standards (OAuth, JWT). Proven background in managing cloud-native databases (PostgreSQL, MongoDB, DynamoDB, Aurora, RDS).
             </p>
+            <!-- END OF MODIFIED SECTION -->
         </section>
 
         <section id="experience" class="card">
             <h2 class="section-heading">Professional Experience</h2>
+            <!-- START OF MODIFIED SECTION: Updated Experience Intro -->
             <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto mb-8">
-                Explore my career journey through the interactive timeline below. Click on each job title to reveal detailed responsibilities and achievements, showcasing my contributions in various roles.
+                Explore my career journey through the interactive timeline below.
             </p>
+            <!-- END OF MODIFIED SECTION -->
 
             <div class="relative">
                 <div class="experience-item">
@@ -269,24 +273,25 @@
                     <div id="orange-comet-details" class="details-content">
                         <div class="mt-4">
                             <h4 class="text-lg font-semibold text-gray-800">Project: Cloud Service Architecture for Orange Comet</h4>
-                            <p class="text-gray-700 mt-1">Designed and implemented a scalable, secure, and automated AWS cloud infrastructure to support the company's core digital collectible and gaming platforms, using Infrastructure-as-Code tools like CloudFormation and Terraform.</p>
+                            <p class="text-gray-700 mt-1">Built and automated the AWS infrastructure for the company's core digital collectible and gaming platforms using IaC tools like CloudFormation and Terraform.</p>
                             <ul class="list-disc pl-5 mt-2 text-gray-700">
-                                <li>Architected and deployed core infrastructure stacks including identity management (Cognito), Kubernetes clusters (EKS), load balancing (ALB), content delivery (CloudFront), and secure remote access (Client VPN).</li>
-                                <li>Managed the full data lifecycle, utilizing S3 for object storage and a mix of RDS and DynamoDB for structured and NoSQL databases.</li>
-                                <li>Established best practices for infrastructure deployment and management, creating a repeatable and reliable process for multiple environments.</li>
+                                <li>Architected and deployed core infrastructure, including networking (VPC, Route 53), compute (EKS, EC2, Lambda), API management (API Gateway), and content delivery (CloudFront, Cloudflare).</li>
+                                <li>Managed identity and access using IAM roles and Cognito for user authentication, and AWS Secrets Manager for handling credentials securely.</li>
+                                <li>Implemented a multi-layered security posture using AWS WAF & Shield for protection against web attacks, GuardDuty for intelligent threat detection, and Security Hub for centralized security monitoring.</li>
+                                <li>Managed the data lifecycle using S3 for object storage and a mix of RDS and DynamoDB for databases, while ensuring comprehensive monitoring and logging with CloudWatch and CloudTrail.</li>
                             </ul>
                         </div>
                         <div class="mt-4">
-                            <h4 class="text-lg font-semibold text-gray-800">Project: End-to-End Secure CI/CD Pipeline Design</h4>
-                            <p class="text-gray-700 mt-1">Developed comprehensive CI/CD pipelines to automate application and infrastructure delivery.</p>
+                            <h4 class="text-lg font-semibold text-gray-800">Project: Secure CI/CD Pipelines</h4>
+                            <p class="text-gray-700 mt-1">Developed CI/CD pipelines to automate application and infrastructure delivery.</p>
                             <ul class="list-disc pl-5 mt-2 text-gray-700">
-                                <li>Using GitHub Actions, built a pipeline for blockchain RPC caching services that integrated multi-layered security scanning (SAST and Docker image analysis) before deploying to EKS.</li>
-                                <li>Engineered a separate Jenkins pipeline to build and deploy games made in Unreal Engine 5, streamlining the release process for gaming projects.</li>
+                                <li>Using GitHub Actions, built a secure pipeline for blockchain services that integrated multiple security checks, including Static Application Security Testing (SAST) for code analysis, Software Composition Analysis (SCA) for dependency scanning, and vulnerability scans for Docker images before deployment to EKS.</li>
+                                <li>Engineered a separate Jenkins pipeline to build and deploy games made in Unreal Engine 5, accelerating the release process for gaming projects.</li>
                             </ul>
                         </div>
                         <div class="mt-4">
                             <h4 class="text-lg font-semibold text-gray-800">Project: Infrastructure Support for The Immortal Pass</h4>
-                            <p class="text-gray-700 mt-1">Played a pivotal role in deploying and supporting the cloud infrastructure for the high-traffic NFT project, <a href="https://theimmortalpass.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">The Immortal Pass</a>. My work ensured the platform remained scalable, available, and performant during peak user activity.</p>
+                            <p class="text-gray-700 mt-1">Deployed and supported the cloud infrastructure for this high-traffic NFT project, <a href="https://theimmortalpass.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">The Immortal Pass</a>, ensuring the platform remained scalable, available, and performant. </p>
                         </div>
                     </div>
                 </div>
@@ -303,10 +308,10 @@
                     <div id="mint-state-details" class="details-content">
                         <div class="mt-4">
                             <h4 class="text-lg font-semibold text-gray-800">Project: Rust-Based Web3 Caching Service</h4>
-                            <p class="text-gray-700 mt-1">Engineered a high-performance caching tool using Rust to efficiently index and serve blockchain transaction data for Web3 applications.</p>
+                            <p class="text-gray-700 mt-1">Engineered a high-performance caching tool in Rust to efficiently index and serve blockchain transaction data.</p>
                             <ul class="list-disc pl-5 mt-2 text-gray-700">
-                                <li>Developed efficient microservices in Rust that significantly improved data retrieval times by providing a fast, reliable caching layer, reducing the direct load on blockchain RPC nodes.</li>
-                                <li>Integrated the caching service into automated CI workflows to ensure continuous testing and deployment.</li>
+                                <li>Developed efficient microservices that significantly improved data retrieval times by reducing the direct load on blockchain RPC nodes.</li>
+                                <li>Integrated the caching service into CI workflows to ensure continuous testing and deployment.</li>
                             </ul>
                         </div>
                     </div>
@@ -323,7 +328,7 @@
                     </div>
                     <div id="universidade-details" class="details-content">
                          <ul class="list-disc pl-5 mt-2 text-gray-700">
-                            <li>Developed backend features for the <a href="https://www.payt-portugal.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Payt project</a> using C++, PostgreSQL, Docker, Python, and Java.</li>
+                            <li>Developed backend features for the <a href="https://www.payt-portugal.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Payt project</a>, using C++, PostgreSQL, Docker, Python, and Java.</li>
                             <li>Built and tested Dockerized services in isolated environments, ensuring portability.</li>
                         </ul>
                     </div>
@@ -334,71 +339,71 @@
         <section id="skills" class="card">
             <h2 class="section-heading">Technical Skills</h2>
             <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto mb-8">
-                Here is a comprehensive list of my technical skills, categorized for easy review. Click the ✨ icon next to any skill to get a quick explanation!
+                Here is a list of my technical skills. Click the ✨ icon for a brief explanation.
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2 text-gray-700">
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">Cloud Platforms:</span> AWS, GCP (EKS, Lambda, EC2, S3, RDS, DynamoDB, Aurora, CloudFormation, Route53)</span>
                     <button class="sparkle-button" data-skill="Cloud Platforms"
-                            data-explanation="At Orange Comet, I maintain and optimize AWS services like CloudFormation, EKS, Lambda, EC2, VPC, S3, DynamoDB, RDS, SNS, SQS, and Route53 for high availability and performance.">✨</button>
+                            data-explanation="At Orange Comet, I optimize and maintain AWS services like CloudFormation, EKS, Lambda, EC2, VPC, S3, DynamoDB, RDS, and Route53 to ensure high availability and performance.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">Infrastructure-as-Code:</span> Terraform, AWS CDK, Ansible, CloudFormation</span>
                     <button class="sparkle-button" data-skill="Infrastructure-as-Code"
-                            data-explanation="I automate infrastructure provisioning at Orange Comet using Terraform, Ansible, and AWS CloudFormation, ensuring consistent and efficient deployments across environments.">✨</button>
+                            data-explanation="I automate infrastructure provisioning at Orange Comet with Terraform, Ansible, and AWS CloudFormation, ensuring consistent and efficient deployments.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">CI/CD:</span> Jenkins, GitHub Actions, GitLab CI</span>
                     <button class="sparkle-button" data-skill="CI/CD"
-                            data-explanation="At Orange Comet, I design, deploy, and manage Jenkins CI/CD pipelines, significantly improving release efficiency and automation for software delivery.">✨</button>
+                            data-explanation="At Orange Comet, I design and implement CI/CD pipelines with Jenkins and GitHub Actions, significantly improving the efficiency of software releases.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">Containerization & Orchestration:</span> Docker, Docker Compose, Kubernetes (EKS, on-premises)</span>
                     <button class="sparkle-button" data-skill="Containerization & Orchestration"
-                            data-explanation="I manage EKS clusters at Orange Comet and built and tested Dockerized services for the Payt project at Universidade de Aveiro, ensuring portable and scalable application deployments.">✨</button>
+                            data-explanation="I manage EKS clusters at Orange Comet and built Dockerized services for the Payt project at the University of Aveiro, ensuring portable and scalable deployments.">✨</button>
                 </div>
                 <div class="skill-item">
-                    <span class="skill-text"><span class="font-semibold text-gray-800">Scripting & Automation:</span> Bash, PowerShell, Python (Linux & Windows environments)</span>
+                    <span class="skill-text"><span class="font-semibold text-gray-800">Scripting & Automation:</span> Bash, PowerShell, Python (Linux & Windows)</span>
                     <button class="sparkle-button" data-skill="Scripting & Automation"
-                            data-explanation="I use Bash, PowerShell, and Python for scripting and automation to support multi-environment delivery across Windows and Linux systems at Orange Comet, and for backend development at Universidade de Aveiro.">✨</button>
+                            data-explanation="I use Bash, PowerShell, and Python for scripting and automation in both Windows and Linux environments at Orange Comet, and for backend development at the University of Aveiro.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">Programming Languages:</span> Rust, Python, Java, TypeScript, JavaScript, C++, C#</span>
                     <button class="sparkle-button" data-skill="Programming Languages"
-                            data-explanation="I develop scalable backend APIs in Rust and TypeScript at Orange Comet, built high-performance microservices in Rust at Mint State Labs, and contributed to backend features using C++, Python, and Java for the Payt project at Universidade de Aveiro.">✨</button>
+                            data-explanation="I develop APIs in Rust and TypeScript at Orange Comet, built microservices in Rust at Mint State Labs, and contributed with C++, Python, and Java to the Payt project at the University of Aveiro.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">Databases:</span> PostgreSQL, MongoDB, DynamoDB, Aurora, RDS</span>
                     <button class="sparkle-button" data-skill="Databases"
-                            data-explanation="I manage cloud-native databases like DynamoDB, Aurora, and RDS at Orange Comet, and developed backend features using PostgreSQL for the Payt project at Universidade de Aveiro.">✨</button>
+                            data-explanation="I manage cloud-native databases like DynamoDB, Aurora, and RDS at Orange Comet, and developed features using PostgreSQL in the Payt project at the University of Aveiro.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">API Security:</span> OAuth 2.0, JWT, API Gateways, Rate Limiting</span>
                     <button class="sparkle-button" data-skill="API Security"
-                            data-explanation="At Orange Comet, I implement and enforce robust API authentication and gateway security best practices, including OAuth 2.0 and JWT, to protect our backend services.">✨</button>
+                            data-explanation="At Orange Comet, I implement and enforce API security best practices, including OAuth 2.0 and JWT, to protect our backend services.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">DevOps Tools:</span> Git, Nexus, Vault, Helm</span>
                     <button class="sparkle-button" data-skill="DevOps Tools"
-                            data-explanation="I leverage a range of DevOps tools including Git for version control, Jenkins for CI/CD, and other tools like Nexus, Vault, and Helm to streamline development and operations processes across my roles.">✨</button>
+                            data-explanation="I use a wide range of DevOps tools, including Git for version control, Jenkins for CI/CD, and others like Nexus, Vault, and Helm to optimize development processes.">✨</button>
                 </div>
                 <div class="skill-item">
                     <span class="skill-text"><span class="font-semibold text-gray-800">Operating Systems:</span> Linux, Windows</span>
                     <button class="sparkle-button" data-skill="Operating Systems"
-                            data-explanation="I have extensive experience supporting multi-environment delivery across both Windows and Linux systems at Orange Comet, ensuring compatibility and optimal performance for various applications.">✨</button>
+                            data-explanation="I have extensive experience in both Windows and Linux environments at Orange Comet, ensuring compatibility and optimal performance for various applications.">✨</button>
                 </div>
             </div>
         </section>
 
         <section id="education" class="card">
             <h2 class="section-heading">Education</h2>
-            <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto mb-8">
-                My academic foundation has equipped me with the theoretical knowledge and problem-solving skills essential for a successful career in software engineering and DevOps.
+             <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto mb-8">
+                My academic background has provided me with the theoretical knowledge and problem-solving skills essential for my career.
             </p>
             <div class="text-center">
-                <h3 class="text-xl font-semibold text-blue-700">Bachelor’s in Computer and Telematics Engineering</h3>
-                <p class="text-gray-600">Universidade de Aveiro, Portugal</p>
+                <h3 class="text-xl font-semibold text-blue-700">BSc in Computer and Telematics Engineering</h3>
+                <p class="text-gray-600">University of Aveiro, Portugal</p>
             </div>
         </section>
 
@@ -416,9 +421,9 @@
         </section>
 
         <section id="languages" class="card">
-            <h2 class="section-heading">Language Proficiency</h2>
+            <h2 class="section-heading">Languages</h2>
             <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto mb-8">
-                My fluency in multiple languages enables effective communication and collaboration in diverse professional environments.
+                My fluency in multiple languages allows me to communicate and collaborate effectively in diverse professional environments.
             </p>
             <div class="text-center">
                 <ul class="list-none text-gray-700 inline-block text-left">
@@ -433,7 +438,7 @@
     <footer class="bg-gray-800 text-white py-8 text-center">
         <div class="container-main">
             <p>&copy; 2024 João Monteiro. All rights reserved.</p>
-            <p class="text-sm mt-2">Designed and built to showcase skills and experience.</p>
+            <p class="text-sm mt-2">Designed and built to showcase my skills and experience.</p>
         </div>
     </footer>
 
