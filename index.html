@@ -39,6 +39,11 @@
         h1, h2, h3 {
             color: #1e293b;
         }
+        h4 {
+            color: #1e293b;
+            font-weight: 600; /* semibold */
+            font-size: 1.125rem; /* text-lg */
+        }
         .section-heading {
             text-align: center;
             font-size: 2.25rem; /* text-4xl */
@@ -90,14 +95,26 @@
         .experience-item:last-child::after {
             display: none; /* Hide line for last item */
         }
+        /* NEW: Styles for interactive experience items */
+        .experience-item .cursor-pointer {
+            transition: background-color 0.2s ease-in-out;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .experience-item .cursor-pointer:hover {
+            background-color: #f1f5f9; /* A light gray-blue */
+        }
+        .experience-item .cursor-pointer.open svg {
+            transform: rotate(180deg);
+        }
         .details-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            transition: max-height 0.7s ease-in-out, opacity 0.5s ease-in-out;
             opacity: 0;
         }
         .details-content.open {
-            max-height: 500px; /* Sufficiently large to show content */
+            max-height: 1000px; /* Increased max-height for more content */
             opacity: 1;
             margin-top: 0.75rem;
         }
@@ -239,47 +256,74 @@
 
             <div class="relative">
                 <div class="experience-item">
-                    <div class="cursor-pointer" data-target="orange-comet-details">
-                        <h3 class="text-xl font-semibold text-blue-700">DevOps Engineer</h3>
-                        <p class="text-gray-600">Orange Comet – Remote, United States</p>
-                        <p class="text-sm text-gray-500">📅 Dec 2022 – Present</p>
+                     <!-- START OF MODIFIED SECTION: Added flex container and SVG icon -->
+                    <div class="cursor-pointer flex justify-between items-center" data-target="orange-comet-details">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-700">Cloud DevOps Engineer</h3>
+                            <p class="text-gray-600">Orange Comet – Remote, United States</p>
+                            <p class="text-sm text-gray-500">📅 Dec 2022 – Present</p>
+                        </div>
+                        <svg class="w-6 h-6 text-blue-600 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </div>
+                    <!-- END OF MODIFIED SECTION -->
                     <div id="orange-comet-details" class="details-content">
-                        <ul class="list-disc pl-5 mt-2 text-gray-700">
-                            <li>Maintained and optimized AWS infrastructure (CloudFormation, EKS, Lambda, EC2, VPC, S3, RDS, DynamoDB, SQS, SNS) for high availability.</li>
-                            <li>Developed scalable backend APIs in Rust and TypeScript.</li>
-                            <li>Designed, deployed, and managed Jenkins CI/CD pipelines, significantly improving release efficiency.</li>
-                            <li>Automated infrastructure provisioning with Terraform, Ansible, and AWS CloudFormation.</li>
-                            <li>Implemented and enforced API authentication and gateway security best practices.</li>
-                            <li>Supported multi-environment delivery across Windows and Linux systems.</li>
-                        </ul>
+                        <div class="mt-4">
+                            <h4 class="text-lg font-semibold text-gray-800">Project: Cloud Service Architecture for Orange Comet</h4>
+                            <p class="text-gray-700 mt-1">Designed and implemented a scalable, secure, and automated AWS cloud infrastructure to support the company's core digital collectible and gaming platforms, using Infrastructure-as-Code tools like CloudFormation and Terraform.</p>
+                            <ul class="list-disc pl-5 mt-2 text-gray-700">
+                                <li>Architected and deployed core infrastructure stacks including identity management (Cognito), Kubernetes clusters (EKS), load balancing (ALB), content delivery (CloudFront), and secure remote access (Client VPN).</li>
+                                <li>Managed the full data lifecycle, utilizing S3 for object storage and a mix of RDS and DynamoDB for structured and NoSQL databases.</li>
+                                <li>Established best practices for infrastructure deployment and management, creating a repeatable and reliable process for multiple environments.</li>
+                            </ul>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-lg font-semibold text-gray-800">Project: End-to-End Secure CI/CD Pipeline Design</h4>
+                            <p class="text-gray-700 mt-1">Developed comprehensive CI/CD pipelines to automate application and infrastructure delivery.</p>
+                            <ul class="list-disc pl-5 mt-2 text-gray-700">
+                                <li>Using GitHub Actions, built a pipeline for blockchain RPC caching services that integrated multi-layered security scanning (SAST and Docker image analysis) before deploying to EKS.</li>
+                                <li>Engineered a separate Jenkins pipeline to build and deploy games made in Unreal Engine 5, streamlining the release process for gaming projects.</li>
+                            </ul>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-lg font-semibold text-gray-800">Project: Infrastructure Support for The Immortal Pass</h4>
+                            <p class="text-gray-700 mt-1">Played a pivotal role in deploying and supporting the cloud infrastructure for the high-traffic NFT project, <a href="https://theimmortalpass.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">The Immortal Pass</a>. My work ensured the platform remained scalable, available, and performant during peak user activity.</p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="experience-item">
-                    <div class="cursor-pointer" data-target="mint-state-details">
-                        <h3 class="text-xl font-semibold text-blue-700">Back-End Developer</h3>
-                        <p class="text-gray-600">Mint State Labs – Remote, United States</p>
-                        <p class="text-sm text-gray-500">📅 Jul 2022 – Dec 2022</p>
+                    <div class="cursor-pointer flex justify-between items-center" data-target="mint-state-details">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-700">Back-End Developer</h3>
+                            <p class="text-gray-600">Mint State Labs – Remote, United States</p>
+                            <p class="text-sm text-gray-500">📅 Jul 2022 – Dec 2022</p>
+                        </div>
+                        <svg class="w-6 h-6 text-blue-600 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </div>
                     <div id="mint-state-details" class="details-content">
-                        <ul class="list-disc pl-5 mt-2 text-gray-700">
-                            <li>Built and maintained high-performance microservices in Rust.</li>
-                            <li>Integrated services into automated CI workflows, enhancing development efficiency.</li>
-                            <li>Optimized API and infrastructure performance for responsiveness and scalability.</li>
-                        </ul>
+                        <div class="mt-4">
+                            <h4 class="text-lg font-semibold text-gray-800">Project: Rust-Based Web3 Caching Service</h4>
+                            <p class="text-gray-700 mt-1">Engineered a high-performance caching tool using Rust to efficiently index and serve blockchain transaction data for Web3 applications.</p>
+                            <ul class="list-disc pl-5 mt-2 text-gray-700">
+                                <li>Developed efficient microservices in Rust that significantly improved data retrieval times by providing a fast, reliable caching layer, reducing the direct load on blockchain RPC nodes.</li>
+                                <li>Integrated the caching service into automated CI workflows to ensure continuous testing and deployment.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
                 <div class="experience-item">
-                    <div class="cursor-pointer" data-target="universidade-details">
-                        <h3 class="text-xl font-semibold text-blue-700">Research Scholar Engineer</h3>
-                        <p class="text-gray-600">Universidade de Aveiro – Aveiro, Portugal</p>
-                        <p class="text-sm text-gray-500">📅 Apr 2021 – Jan 2022</p>
+                    <div class="cursor-pointer flex justify-between items-center" data-target="universidade-details">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-700">Research Scholar Engineer</h3>
+                            <p class="text-gray-600">Universidade de Aveiro – Aveiro, Portugal</p>
+                            <p class="text-sm text-gray-500">📅 Apr 2021 – Jan 2022</p>
+                        </div>
+                        <svg class="w-6 h-6 text-blue-600 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </div>
                     <div id="universidade-details" class="details-content">
-                        <ul class="list-disc pl-5 mt-2 text-gray-700">
-                            <li>Developed backend features for the Payt project using C++, PostgreSQL, Docker, Python, and Java.</li>
+                         <ul class="list-disc pl-5 mt-2 text-gray-700">
+                            <li>Developed backend features for the <a href="https://www.payt-portugal.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Payt project</a> using C++, PostgreSQL, Docker, Python, and Java.</li>
                             <li>Built and tested Dockerized services in isolated environments, ensuring portability.</li>
                         </ul>
                     </div>
@@ -367,7 +411,7 @@
                 <h3 class="text-xl font-semibold text-blue-700">AWS Certified Cloud Practitioner</h3>
                 <p class="text-gray-600">Issue Date: Feb 2024 | Expiration Date: Feb 2027</p>
                 <p class="text-gray-600">Credential ID: 56b427c4badf49d397f16fc4e8ed9c29</p>
-                <a href="https://cp.certmetrics.com/amazon/en/public/verify/credential/56b427c4badf49d397f16fc4e8ed9c29" target="_blank" rel="noopener noreferrer" class="link-style mt-2 inline-block">Verify Credential</a>
+                <a href="https://cp.certmetrics.com/amazon/en/public/verify/credential/56b427c4badf49d397f16fc4e8ed9c29" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline mt-2 inline-block">Verify Credential</a>
             </div>
         </section>
 
@@ -377,9 +421,9 @@
                 My fluency in multiple languages enables effective communication and collaboration in diverse professional environments.
             </p>
             <div class="text-center">
-                <ul class="list-disc list-inside text-gray-700">
-                    <li>Portuguese: Native</li>
-                    <li>English: C1 – Professional Working Proficiency</li>
+                <ul class="list-none text-gray-700 inline-block text-left">
+                    <li><span class="font-semibold">Portuguese:</span> Native</li>
+                    <li><span class="font-semibold">English:</span> C1 – Professional Working Proficiency</li>
                 </ul>
             </div>
         </section>
@@ -430,11 +474,13 @@
                     const targetElement = document.getElementById(targetId);
                     if (targetElement) {
                         targetElement.classList.toggle('open');
+                        // NEW: Toggle 'open' class on the header for icon rotation
+                        this.classList.toggle('open');
                     }
                 });
             });
 
-            // Skill Explanation Modal Logic (now using hardcoded explanations)
+            // Skill Explanation Modal Logic (using hardcoded explanations)
             const skillModal = document.getElementById('skillModal');
             const closeButton = skillModal.querySelector('.close-button');
             const modalSkillTitle = document.getElementById('modalSkillTitle');
